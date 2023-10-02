@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Survey</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="csf">
+        <p>Customer Survey Form</p>
+        <form action="" method="post" id="customerForm">
+            <p id="note">(Note:* indicates all the fields that are Required)</p>
+            <label for="fname">FirstName: *</label><br>
+            <input type="text" id="fname" required><br>
+            <label for="lname">LastName: *</label><br>
+            <input type="text" id="lname" required><br>
+            <label for="DOB">Date Of Birth: *</label><br>
+            <input type="date" id="dob" required><br>
+            <label for="country">Country: *</label>
+            <select id="country" name="country" required>
+                <option value="IND">India</option>
+                <option value="AUS">Australia</option>
+                <option value="UK">UK</option>
+                <option value="US">USA</option>
+            </select><br><br>
+            <label for="gender">Gender: *</label><br>
+            <input type="radio" id="male" name="gender" value="Male" required>
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="Female">
+            <label for="female">Female</label><br>
+            <label for="profession">Profession: *</label><br>
+            <input type="text" id="prof" required><br>
+            <label for="email">Email: *</label><br>
+            <input type="text" id="email" required><br>
+            <label for="mob">Mobile Number: *</label><br>
+            <input type="text" id="mob" required><br>
+            <div id="twoBtn">
+                <button type="submit" id="submit">Submit</button>
+                <button type="reset" id="resetForm">Reset</button>
+            </div>
+        </form>
+    </div>
+    <div id="popup">
+        <h2>Your Information</h2>
+        <ul id="selectedValues"></ul>
+        <button id="closePopup">Close</button>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>
