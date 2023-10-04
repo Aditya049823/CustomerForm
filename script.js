@@ -23,9 +23,6 @@ function validateForm() {
         alert("All required fields must be filled out");
         return false; // Prevent form submission
     }
-
-    // Add more specific validation checks here, e.g., for email and mobile number format.
-
     return true; // Form is valid, allow submission
 }
 
@@ -42,7 +39,7 @@ forms.addEventListener('submit', function (event) {
         if (element.tagName === "INPUT" || element.tagName === "SELECT") {
             const label = forms.querySelector(`label[for="${element.id}"]`);
             if (label) {
-                const labelText = label.textContent.replace(':', ''); // Remove the colon
+                const labelText = label.textContent.replace(':', ''); 
                 let value = element.value;
                 if (element.type === "radio" && !element.checked) {
                     continue; // Skip unchecked radio buttons
