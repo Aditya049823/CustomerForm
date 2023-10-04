@@ -34,32 +34,26 @@ forms.addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent the form from actually submitting
 
     const selectedValues = [];
-    const labels = forms.getElementsByTagName('label');
-    const inputs = forms.getElementsByTagName('input');
-    const selects = forms.getElementsByTagName('select');
-    const radios = forms.querySelectorAll('input[type="radio"]:checked');
 
-    for (let i = 0; i < labels.length; i++) {
-        const labelText = labels[i].textContent.replace(':', ''); // Remove the colon
-        if (inputs[i] && inputs[i].type === 'text') {
-            selectedValues.push(`${labelText}: ${inputs[i].value}`);
-        } else if (selects[i]) {
-            const selectedOption = selects[i].options[selects[i].selectedIndex];
-            selectedValues.push(`${labelText}: ${selectedOption.textContent}`);
+    // Iterate through the form elements
+    const formElements = forms.elements;
+    for (let i = 0; i < formElements.length; i++) {
+        const element = formElements[i];
+        if (element.tagName === "INPUT" || element.tagName === "SELECT") {
+            const label = forms.querySelector(`label[for="${element.id}"]`);
+            if (label) {
+                const labelText = label.textContent.replace(':', ''); // Remove the colon
+                let value = element.value;
+                if (element.type === "radio" && !element.checked) {
+                    continue; // Skip unchecked radio buttons
+                }
+                if (element.type === "select-one") {
+                    value = element.options[element.selectedIndex].textContent;
+                }
+                selectedValues.push(`${labelText}: ${value}`);
+            }
         }
     }
-
-    for (let i = 0; i < radios.length; i++) {
-        selectedValues.push(`Gender: ${radios[i].value}`);
-    }
-
-    // Add Date of Birth and Country to selected values
-    const dob = forms.querySelector('#dob');
-    selectedValues.push(`Date of Birth: ${dob.value}`);
-
-    const country = forms.querySelector('#country');
-    const selectedCountryOption = country.options[country.selectedIndex];
-    selectedValues.push(`Country: ${selectedCountryOption.textContent}`);
 
     // Populate the popup with selected values
     selectedList.innerHTML = selectedValues.map(value => `<li>${value}</li>`).join('');
